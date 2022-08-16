@@ -1,16 +1,22 @@
-import {
-    API_URL_TOKEN,
-    ACCESS_KEY,
-    REDIRECT_URI,
-    SECRET_KEY,
-    GRANT_TYPE
-  } from './const';
+
+export const urlToken = `${API_URL_TOKEN}${searchParams.toString()}`;
+
+export const setToken = (token) => {
+    localStorage.setItem('bearer', token);
+}; 
+export const getToken = () => {
+    let token = '';
+    if (location.pathname.includes('/auth')) {
+        token = new URLSearchParams(location.hash.substring(1))
+        .get('access_token');
+        setToken(token);
+    }
+    if (localStorage.getItem('bearer')) {
+        token = localStorage.getItem('bearer');
+    }
+    return token;
+};
+
+
   
-  const searchParams = new URLSearchParams();
   
-  searchParams.append('client_id', ACCESS_KEY);
-  searchParams.append('redirect_uri', REDIRECT_URI);
-  searchParams.append('grant_type', GRANT_TYPE);
-  searchParams.append('client_secret', SECRET_KEY);
-  
-  export const urlToken = `${API_URL_TOKEN}${searchParams.toString()}`;
