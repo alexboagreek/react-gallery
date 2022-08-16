@@ -8,5 +8,5 @@ export const useToken = () => {
 
     useEffect(() => {
         dispatch(tokenRequestAsync(code));
-}, [code]);
+    }, [code]);
 };
