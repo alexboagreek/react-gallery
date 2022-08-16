@@ -7,10 +7,15 @@ const CLEAR_CODE = 'CLEAR_CODE';
 
 export const updateCode = (code) => ({
     type: CLEAR_CODE,
+    code,
+});
+
+export const clearCode = () => ({
+    type: CLEAR_CODE,
     code: false,
 });
 
-export const codeReucer = (state = initialState, action) => {
+export const codeReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_CODE:
             return {
