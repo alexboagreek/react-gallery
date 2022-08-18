@@ -6,12 +6,12 @@ import thunk from 'redux-thunk';
 import photosSlice from './photos/photosSlice';
 
 export const store = configureStore({
-   reducer: {
+  reducer: {
     code: codeReducer,
     token: tokenReducer,
     auth: authReducer,
     photos: photosSlice,
-   },
-   middleware: (getDefaultMiddleware) => 
-     getDefaultMiddleware().concat(tokenMiddleware, thunk),
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(tokenMiddleware, thunk),
 });

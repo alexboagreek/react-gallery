@@ -3,10 +3,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {tokenRequestAsync} from '../store/token/actionToken';
 
 export const useToken = () => {
-    const code = useSelector(state => state.code.code);
-    const dispatch = useDispatch();
+  const code = useSelector(state => state.code.code);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(tokenRequestAsync(code));
-    }, [code]);
+  useEffect(() => {
+    dispatch(tokenRequestAsync(code));
+  }, [code]);
 };
