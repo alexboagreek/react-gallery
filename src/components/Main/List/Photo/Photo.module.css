@@ -1,0 +1,19 @@
+.photo {
+    position: relative;
+    margin-bottom: 15px;
+    max-width: 400px;
+}
+.image {
+    width: 100%;
+    height: auto;
+}
+.body {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    color: #fff;
+    transition: scale 0.3s ease 0.3s;
+}
