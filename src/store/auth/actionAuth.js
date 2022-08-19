@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL, ACCESS_KEY} from '../../api/const';
+import {API_URL, CLIENT_ID} from '../../api/const';
 
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
@@ -33,7 +33,7 @@ export const authRequestAsync = () => (dispatch, getState) => {
 
   axios.get(`${API_URL}/me`, {
     params: {
-      access_key: ACCESS_KEY,
+      client_id: CLIENT_ID,
     },
     headers: {
       Authorization: `Bearer ${token}`,

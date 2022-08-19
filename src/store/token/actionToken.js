@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   API_URL_TOKEN,
-  ACCESS_KEY,
+  CLIENT_ID,
   SECRET_KEY,
   REDIRECT_URI
 } from '../../api/const';
@@ -12,7 +12,7 @@ export const tokenRequestAsync = (codeApp) => (dispatch, getState) => {
     method: 'post',
     url: API_URL_TOKEN,
     data: {
-      access_key: ACCESS_KEY,
+      client_id: CLIENT_ID,
       secret_key: SECRET_KEY,
       redirect_uri: REDIRECT_URI,
       code: codeApp,

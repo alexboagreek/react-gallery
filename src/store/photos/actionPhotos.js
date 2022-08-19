@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-import {API_URL, ACCESS_KEY} from '../../api/const';
+import {API_URL, CLIENT_ID} from '../../api/const';
 
 export const photosRequestAsync = createAsyncThunk(
   'photos/fetch',
@@ -12,7 +12,7 @@ export const photosRequestAsync = createAsyncThunk(
       `${API_URL}/photos?${countPages > 1 ? `page=${countPages}` : ``}`,
       {
         headers: {
-          Authorization: `Access-KEY ${ACCESS_KEY}`,
+          Authorization: `client_id ${CLIENT_ID}`,
         },
       })
       .then(({data: newPhotos}) => {
