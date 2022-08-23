@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL} from './../../api/const';
+import {API_URL} from '../../api/const';
 import {authSlice} from './authSlice';
 import {select, call, put, takeEvery} from 'redux-saga/effects';
 

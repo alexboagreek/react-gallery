@@ -1,32 +1,29 @@
+import React, {useEffect, useRef} from 'react';
+import {Card} from './Card /Card ';
+import {useDispatch, useSelector} from 'react-redux';
+import {photosSlice} from '../../../store/photos/photosSlice';
 import style from './List.module.css';
-import Photo from './Photo';
-import {useEffect, useRef} from 'react';
-import {photosRequestAsync} from './../../../store/photos/actionPhotos';
-import {useSelector, useDispatch} from 'react-redux';
-import Masonry from 'react-masonry-css';
+import {ImageList} from '@mui/material';
+import {Outlet} from 'react-router-dom';
 
-export const List = () => {
-  const photos = useSelector(state => state.photos.photos);
-  const token = useSelector(state => state.token.token);
-  const countPages = useSelector(state => state.photos.countPages);
-  const endList = useRef(null);
+export const List = props => {
+  const photos = useSelector(state => state.photosReducer.data);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(photosRequestAsync());
-  }, [token]);
+  const endList = useRef(null);
+  const loading = useSelector(state => state.photosReducer.loading);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        dispatch(photosRequestAsync());
+        dispatch(photosSlice.actions.photosRequest());
       }
     }, {
       rootMargin: '100px',
     });
 
-    observer.observe(endList.current);
-
+    if (endList.current && !loading) {
+      observer.observe(endList.current);
+    }
     return () => {
       if (endList.current) {
         observer.unobserve(endList.current);
@@ -34,24 +31,19 @@ export const List = () => {
     };
   }, [endList.current]);
 
-  // const breakpointColumsObj = {
-  //   default: 4,
-  //   1100: 3,
-  //   700: 2,
-  //   500: 1
-  // };
-
   return (
-    <>
-      <Masonry
-        className={style.masonryGrid}
-        columnClassName={style.masonryGridColumn}>
-        {photos.map(elem => {
-          const id = `${elem.id}${countPages}`;
-          return <Photo key={id} photoData={elem} />;
-        })}
-      </Masonry>
-      <span ref={endList} />
-    </>
+    <ImageList variant='masonry' cols={5} gap={10}>
+      {photos.length > 0 ? (
+        photos.map((item) => (
+          <li key={item.id}>
+            <Card data={item}/>
+          </li>
+        ))
+        ) : (
+          <p>Загрузочка</p>
+        )}
+      <li ref={endList} className={style.end}/>
+      <Outlet/>
+    </ImageList>
   );
 };
