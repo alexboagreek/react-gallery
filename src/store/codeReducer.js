@@ -6,7 +6,7 @@ const UPDATE_CODE = 'UPDATE_CODE';
 const CLEAR_CODE = 'CLEAR_CODE';
 
 export const updateCode = (code) => ({
-  type: CLEAR_CODE,
+  type: UPDATE_CODE,
   code,
 });
 
