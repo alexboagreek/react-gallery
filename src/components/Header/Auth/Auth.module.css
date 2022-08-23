@@ -1,3 +1,14 @@
-.user {
-    margin-left: 10px;
+.button {
+    border: none;
+    background-color: transparent;
+}
+
+.button:hover * {
+    fill-opacity: 0.7;
+}
+
+.profile__info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
