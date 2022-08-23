@@ -1,17 +1,25 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {tokenReducer, tokenMiddleware} from './token/tokenReducer';
-import {authReducer} from './auth/authReducer';
-import {codeReducer} from './codeReducer';
-import thunk from 'redux-thunk';
-import photosSlice from './photos/photosSlice';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './saga';
+import tokenReducer from './token/tokenSlice';
+import authReducer from './auth/authSlice';
+import photosReducer from './photos/photosSlice';
+import photoReducer from './photo/photoSlice';
+import likeReducer from './like/likeSlice';
+
+
+const sagaMiddleWare = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
-    code: codeReducer,
-    token: tokenReducer,
-    auth: authReducer,
-    photos: photosSlice,
+    tokenReducer,
+    authReducer,
+    photosReducer,
+    photoReducer,
+    likeReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tokenMiddleware, thunk),
+    getDefaultMiddleware().concat(sagaMiddleWare),
 });
+
+sagaMiddleWare.run(rootSaga);

@@ -1,19 +1,19 @@
+import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {authLogout, authRequestAsync} from '../store/auth/actionAuth';
+import {authSlice} from '../store/auth/authSlice';
+
 
 export const useAuth = () => {
-  const auth = useSelector(state => state.auth.data);
-  const token = useSelector(state => state.token.token);
-  const loading = useSelector(state => state.auth.loading);
-  const status = useSelector(state => state.auth.status);
+  const auth = useSelector(state => state.authReducer.data);
+  const token = useSelector(state => state.tokenReducer.token);
+  const loading = useSelector(state => state.authReducer.loading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authRequestAsync());
+    dispatch(authSlice.actions.authRequest());
   }, [token]);
 
-  const clearAuth = () => dispatch(authLogout());
-
-  return [auth, loading, status, clearAuth];
+  return [auth, loading];
 };
+

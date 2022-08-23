@@ -1,28 +1,24 @@
+import axios from 'axios';
+import {CLIENT_ID, REDIRECT_URI, SECRET_KEY} from './const';
 
-import {useDispatch} from 'react-redux';
-import {updateCode} from '../store/codeReducer';
-import {useToken} from '../hooks/useToken';
-import {updateToken} from '../store/token/tokenReducer';
+const params = new URLSearchParams(location.search);
+export const code = params.get('code');
 
-export const setToken = token => {
-  localStorage.setItem('bearer', token);
+export const setToken = (token) => {
+  localStorage.setItem('Bearer', token);
 };
 
 export const getToken = () => {
-  let token = '';
-  const dispatch = useDispatch();
+  let token;
+  axios.post(`https://unsplash.com/oauth/token?client_id=${CLIENT_ID}&client_secret=${SECRET_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}&grant_type=authorization_code`)
+    .then(response => {
+      token = response.data['access_token'];
+      localStorage.setItem('Bearer', token);
+    });
+  setToken(token);
 
   if (localStorage.getItem('bearer')) {
     setToken(localStorage.getItem('bearer'));
-    token = localStorage.getItem('bearer');
-    dispatch(updateCode(true));
-  }
-
-  if (location.search.includes('code')) {
-    const code = new URLSearchParams(location.search).get('code');
-    dispatch(updateCode(code));
-    const token = useToken();
-    dispatch(updateToken(token));
   }
 
   return token;
