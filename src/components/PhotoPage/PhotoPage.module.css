@@ -1,0 +1,15 @@
+.like svg {
+    width: 25px;
+    height: 25px;
+    fill: grey;
+}
+
+.like_active svg {
+    width: 25px;
+    height: 25px;
+    fill: red;
+}
+
+.likes {
+    font-weight: bold;
+}
