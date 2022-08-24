@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {Card} from './Card /Card ';
+import {Card} from './Card /Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {photosSlice} from '../../../store/photos/photosSlice';
 import style from './List.module.css';
@@ -40,7 +40,7 @@ export const List = props => {
           </li>
         ))
         ) : (
-          <p>Загрузочка</p>
+          <p>Loading photos</p>
         )}
       <li ref={endList} className={style.end}/>
       <Outlet/>

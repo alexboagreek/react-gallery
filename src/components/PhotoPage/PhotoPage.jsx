@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import style from './PhotoPage.module.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {photoSlice} from './../../store/photo/photoSlice';
-import {useParams} from 'react-router-dom';
-import {Layout} from './../Main/Layout/Layout';
+import {useParams, Link} from 'react-router-dom';
+import {Layout} from '../Layout/Layout';
 import formatDate from './../../utils/formatDate';
 import {ReactComponent as LikeIcon} from './img/like.svg';
 import {likeSlice} from './../../store/like/likeSlice';
@@ -63,11 +63,12 @@ export const PhotoPage = () => {
                   onClick={handleLike}>
                   <LikeIcon fill='grey'/>
                 </button>
+                <Link to='/'>На главную</Link>
               </div>
             )}
           </>
         ) : (
-          <h2>Загрузка фотографии</h2>
+          <h2>Loading magic photo</h2>
         )}
       </div>
     </Layout>
