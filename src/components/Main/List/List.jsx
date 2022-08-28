@@ -1,8 +1,8 @@
 import React, {useEffect, useRef} from 'react';
-import {Card} from './Card /Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {photosSlice} from '../../../store/photos/photosSlice';
 import style from './List.module.css';
+import {Card} from './Card/Card';
 import {ImageList} from '@mui/material';
 import {Outlet} from 'react-router-dom';
 
@@ -40,7 +40,7 @@ export const List = props => {
           </li>
         ))
         ) : (
-          <p>Loading photos</p>
+          <p>Loading photo</p>
         )}
       <li ref={endList} className={style.end}/>
       <Outlet/>
